@@ -25,6 +25,7 @@
     <%= f.fields_for :images do |image| %>
       <%= render 'image_fields', :f => image %>
     <% end %>
+
     <div class="links">
       <%= link_to_add_association 'add image', f, :images %>
     </div>
@@ -34,3 +35,58 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+
+    $('#images').on('cocoon:before-insert', function(e, insertedItem) {
+
+        var target_field_id = insertedItem.find("input")[0].id.toString();
+
+        insertedItem.find(".image_input").change(function(){
+
+           var image_input_element = insertedItem.find(".image_input")[0];
+           // var chosen_file         = image_input_element.files.item(0);
+           // var file_type           = chosen_file.type;
+           
+           
+           var fd = new FormData();    
+           fd.append( 'file', image_input_element.files[0] );
+           fd.append( 'target_field_id', target_field_id );
+
+           $.ajax({
+             url: "<%= upload_s3_url %>",
+             data: fd,
+             processData: false,
+             contentType: false,
+             type: 'POST',
+             done: function(data){
+               console.log( "ajax request done!" );
+             }
+           });
+           
+           // // read selected file on client-side
+           // var reader = new FileReader();
+           // reader.onload = (function(theFile) {
+           //     return function(e) {
+           //       var image_name    = theFile.name;
+           //       var image_content = e.target.result;
+           //       
+           //       // ajax call to save the image in s3
+           //       $.ajax({
+           //         type: "POST",
+           //         url: "<%= upload_s3_url %>",
+           //         data: { target_field_id: target_field_id, image_name: image_name, image_content : image_content, file_type : file_type }
+           //       })
+           //         .done(function( msg ) {
+           //           console.log( "back from ajax call!!!!" );
+           //         });
+           //       
+           //     };
+           // })(chosen_file);
+           // // reader.readAsDataURL(chosen_file);
+           // reader.readAsText(chosen_file);
+           
+        });
+    });
+
+</script>

@@ -42,3 +42,5 @@ gem 'redcarpet'
 gem 'rouge'
 
 gem "cocoon"
+
+gem 'aws-sdk'

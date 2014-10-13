@@ -2,6 +2,7 @@
     <div class="field">
         <%= f.label :image_url %><br>
         <%= f.text_field :image_url %>
+        <input id="imagefile" class="image_input" name="imagefile" type="file" />
     </div>
 
     <%= link_to_remove_association "remove image", f %>
