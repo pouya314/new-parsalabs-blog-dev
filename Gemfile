@@ -41,6 +41,6 @@ gem 'spring',        group: :development
 gem 'redcarpet'
 gem 'rouge'
 
-gem "cocoon"
+gem 'cocoon'
 
 gem 'aws-sdk'
