@@ -5,7 +5,7 @@ class UploadController < ApplicationController
     # o.acl = :public_read
     # o.public_url
 
-    o = S3_BUCKET.objects.create(params[:file].original_filename.to_s, params[:file].read)
+    o = S3_BUCKET.objects.create(SecureRandom.uuid + params[:file].original_filename.to_s, params[:file].read)
     o.acl = :public_read
     @public_url = o.public_url
     @target_field_id = params[:target_field_id]
