@@ -23,3 +23,15 @@
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+
+
+<br>
+<br>
+<input type="button" name="my-button" value="CLICK ME" id="my-button">
+<div id="my-target"></div>
+
+<script type="text/javascript" charset="utf-8">
+  $( "#my-button" ).click(function() {
+    $( "#my-target" ).append("<p>HELLO JS</p>");
+  });
+</script>
