@@ -1,19 +1,21 @@
 require 'test_helper'
 
 class BlogTest < ActionDispatch::IntegrationTest
-  setup do
-    Capybara.current_driver = Capybara.javascript_driver
-  end
+  # setup do
+  #   Capybara.current_driver = Capybara.javascript_driver
+  # end
 
   test 'shows blog posts' do
     visit root_path
     
     within("h1") do
       assert has_content? 'POSTS'
-    end
+    end    
   end
 
   test "javascript works" do
+    Capybara.current_driver = Capybara.javascript_driver
+    
     visit root_path
     click_button('CLICK ME')
     
@@ -24,5 +26,7 @@ class BlogTest < ActionDispatch::IntegrationTest
     
     click_button('CLICK ME')
     assert page.has_content? 'HELLO JS', :count => 2
+    
+    Capybara.use_default_driver
   end
 end
