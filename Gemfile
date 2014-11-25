@@ -47,3 +47,5 @@ gem 'aws-sdk'
 
 gem 'capybara'
 gem "capybara-webkit"
+
+gem 'puma'
