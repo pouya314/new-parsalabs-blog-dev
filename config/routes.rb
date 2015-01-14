@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-  post 'upload/s3'
 
+  root 'posts#index'
+  
   resources :posts
+  post 'upload/s3'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  root 'posts#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
